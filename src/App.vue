@@ -1,18 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h2>{{titulo1}}</h2>
+    <h3>Tarea: <span><input type="text" v-model="name"> <button @click="crearTarea">Crear</button></span></h3>
+    <br>
+    <h2>{{titulo2}}</h2>
+    <div class="lista">
+      <ul>
+        <li v-for="(tarea, index) in tareas" :key="index">
+          {{index}}. {{tarea.tarea}}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      titulo1: "Crea una nueva tarea",
+      titulo2: "Lista",
+      name: "",
+      tareas: [
+        {"tarea" : "Ir al supermercado"},
+        {"tarea" : "Pagar internet"},
+        {"tarea" : "Renovar suscripción de Netflix"}
+      ]
+    }
+  },
+  methods: {
+    crearTarea() {
+      this.tareas.push({"tarea" : this.name});
+    }
+  },
 }
 </script>
 
@@ -22,7 +44,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
+}
+
+h2 {
+  color: gray;
+}
+.lista {
+  text-align: left;
+  display: inline-block;
 }
 </style>
